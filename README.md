@@ -1,6 +1,6 @@
 # Fake QQ UI
 
-全方位模仿 QQ NT 的聊天气泡样式与功能
+一个全方位模仿 QQ NT 的聊天气泡样式与功能的 VUE 组件库
 
 > [!NOTE]  
 > 全方位模仿：大部分样式来自与 QQ NT for Windows，部分样式经修改
@@ -63,9 +63,9 @@
    app.use(FakeQQUI)
    ```
 
-  > 深色模式仅支持在 html 根元素的 class 中添加 `dark` 类，不支持媒体查询
+   > 深色模式仅支持在 html 根元素的 class 中添加 `dark` 类，不支持媒体查询
 
-1. 为全局组件提供编辑器类型支持，下面两种方法二选一即可。
+2. 为全局组件提供编辑器类型支持，下面两种方法二选一即可。
 
    1. 修改你的 `tsconfig.json` 中的 `types` 字段，添加 `fake-qq-ui/client`，如：
 
@@ -79,7 +79,7 @@
       /// <reference types="fake-qq-ui/client" />
       ```
 
-2. 在你的页面中直接使用各个组件，详见[API文档](api.md)
+3. 在你的页面中直接使用各个组件，详见[API文档](api.md)
 
    ```html
    <template>
