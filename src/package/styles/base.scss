@@ -1,0 +1,72 @@
+:root {
+  --qq-font_size_1: 10px;
+  --qq-font_size_2: 12px;
+  --qq-font_size_3: 14px;
+  --qq-font_size_4: 16px;
+  --qq-font_size_5: 18px;
+  --qq-avatar_size_1: 20px;
+  --qq-avatar_size_2: 32px;
+  --qq-avatar_size_3: 40px;
+  --qq-font_size_main_1: 12px;
+  --qq-font_size_main_2: 14px;
+  --qq-line_height_1: 14px;
+  --qq-line_height_2: 16px;
+  --qq-line_height_3: 20px;
+  --qq-line_height_4: 22px;
+  --qq-line_height_5: 24px;
+  --qq-line_height_main_1: 18px;
+  --qq-line_height_main_2: 22px;
+}
+
+.nocopy {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.qq-text-ellipsis {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.q-tag {
+  border-radius: 4px;
+  display: inline-block;
+  font-size: var(--qq-font_size_1);
+  padding: 1px 4px;
+
+  &.q-tag--red {
+    background-color: var(--qq-tag_red_bg);
+    color: var(--qq-tag_red_text);
+  }
+
+  &.q-tag--sage_green {
+    background-color: var(--qq-tag_sage_green_bg);
+    color: var(--qq-tag_sage_green_text);
+  }
+
+  &.q-tag--orange {
+    background-color: var(--qq-tag_orange_bg);
+    color: var(--qq-tag_orange_text);
+  }
+
+  &.q-tag--purple {
+    background-color: var(--qq-tag_purple_bg);
+    color: var(--qq-tag_purple_text);
+  }
+
+  &.q-tag--blue {
+    background-color: var(--qq-tag_blue_bg);
+    color: var(--qq-tag_blue_text);
+  }
+
+  &.q-tag--grey {
+    background-color: var(--qq-tag_gray_bg);
+    color: var(--qq-tag_gray_text);
+  }
+}
