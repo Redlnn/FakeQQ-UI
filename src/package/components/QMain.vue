@@ -16,9 +16,5 @@ defineOptions({ name: 'QMain' })
     padding-top: 0;
     margin-top: 0;
   }
-
-  &:deep() * {
-    font-size: 1.05em;
-  }
 }
 </style>
