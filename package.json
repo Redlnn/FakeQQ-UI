@@ -42,7 +42,7 @@
     "@vue/tsconfig": "^0.5.1",
     "@vueuse/core": "^11.1.0",
     "eslint": "^9.13.0",
-    "eslint-plugin-vue": "^9.29.1",
+    "eslint-plugin-vue": "^9.30.0",
     "npm-run-all2": "^7.0.1",
     "prettier": "^3.3.3",
     "sass-embedded": "^1.80.4",
