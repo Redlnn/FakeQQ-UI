@@ -7,6 +7,7 @@ import type QFile from './components/QFile.vue'
 import type QTip from './components/QTip.vue'
 import type QVoice from './components/QVoice.vue'
 import type QMessageItem from './components/base/QMessageItem.vue'
+import type QForward from './components/QForward.vue'
 
 declare module 'vue' {
   export interface GlobalComponents {
@@ -18,6 +19,7 @@ declare module 'vue' {
     QFile: typeof QFile
     QTip: typeof QTip
     QVoice: typeof QVoice
+    QForward: typeof QForward
     QMessageItem: typeof QMessageItem
   }
 }

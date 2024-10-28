@@ -8,13 +8,14 @@ import QImage from './components/QImage.vue'
 import QFile from './components/QFile.vue'
 import QTip from './components/QTip.vue'
 import QVoice from './components/QVoice.vue'
+import QForward from './components/QForward.vue'
 import QMessageItem from './components/base/QMessageItem.vue'
 
 import QTagColors from './lib/QTagColors'
 
 import './styles/base.scss'
 
-const messageComponents = [QReply, QText, QImage, QFile, QTip, QVoice, QMessageItem]
+const messageComponents = [QReply, QText, QImage, QFile, QTip, QVoice, QForward, QMessageItem]
 const extraComponents = [QHeader, QMain]
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -103,6 +103,7 @@ const toggleDark = useToggle(isDark)
         tag-color="purple"
         audio-src="/欧尼酱快起床.m4a"
       ></q-voice>
+      <q-forward user-name="[AntiFurry] 么叽" :content="['test']"></q-forward>
     </q-main>
   </section>
 </template>
