@@ -27,8 +27,8 @@ const toggleDark = useToggle(isDark)
         self
         user-name="[AntiFurry] 么叽"
         avatar-url="http://q1.qlogo.cn/g?b=qq&nk=2595201156&s=640"
-        reply-target-name="方糖"
-        reply-target-content="怎么这个支持笔但不支持触屏"
+        target-name="方糖"
+        reply-text="怎么这个支持笔但不支持触屏"
       >
         @方糖 yes
       </q-reply>
@@ -37,8 +37,8 @@ const toggleDark = useToggle(isDark)
         avatar-url="http://q1.qlogo.cn/g?b=qq&nk=2595201156&s=640"
         tag-content="LV96 ln"
         tag-color="sage_green"
-        reply-target-name="方糖"
-        reply-target-content="怎么这个支持笔但不支持触屏"
+        target-name="方糖"
+        reply-image-url="/85467403_p0.jpg"
       >
         <a at>@方糖</a> yes
       </q-reply>
@@ -103,7 +103,7 @@ const toggleDark = useToggle(isDark)
         tag-color="purple"
         audio-src="/欧尼酱快起床.m4a"
       ></q-voice>
-      <q-forward user-name="[AntiFurry] 么叽" :content="['test']"></q-forward>
+      <q-forward user-name="[AntiFurry] 么叽" :contents="['test']"></q-forward>
     </q-main>
   </section>
 </template>

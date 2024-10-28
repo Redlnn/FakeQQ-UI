@@ -11,7 +11,7 @@ withDefaults(
     tagColor?: QTagColors | keyof typeof QTagColors
     isBot?: boolean
     title?: string
-    content: string[]
+    contents: string[]
   }>(),
   {
     self: false,
@@ -34,9 +34,11 @@ withDefaults(
     :is-bot="isBot"
   >
     <div class="forward-msg nocopy">
-      <div class="fwd-title text-ellipsis">群聊的聊天记录</div>
-      <div class="fwd-content text-ellipsis">洛狼狼の波斯猫: [图片]</div>
-      <div class="count">查看{{ content.length }}条转发消息</div>
+      <div class="fwd-title text-ellipsis">{{ title }}</div>
+      <div v-for="(item, index) in contents" :key="index" class="fwd-content text-ellipsis">
+        {{ item }}
+      </div>
+      <div class="count">查看{{ contents.length }}条转发消息</div>
     </div>
   </q-message-item>
 </template>

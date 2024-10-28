@@ -3,7 +3,7 @@ import QMessageItem from './base/QMessageItem.vue'
 import QReplyMessageElement from './base/QReplyMessageElement.vue'
 import type QTagColors from '@pkg/lib/QTagColors'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     self?: boolean
     userName: string
@@ -11,17 +11,27 @@ withDefaults(
     tagContent?: string
     tagColor?: QTagColors | keyof typeof QTagColors
     isBot?: boolean
-    replyTargetName: string
-    replyTargetContent: string
+    targetName: string
+    replyText?: string
+    replyImageUrl?: string
+    replyImageAlt?: string
+    maxImgWidth?: string
+    maxImgHeight?: string
   }>(),
   {
     self: false,
     avatarUrl: '',
     tagContent: undefined,
     tagColor: undefined,
-    isBot: false
+    isBot: false,
+    replyText: '',
+    replyImageUrl: undefined,
+    replyImageAlt: undefined,
+    maxImgWidth: '200px',
+    maxImgHeight: '220px'
   }
 )
+console.log(props)
 </script>
 
 <template>
@@ -40,8 +50,12 @@ withDefaults(
       <div class="message-content reply-message__inner">
         <q-reply-message-element
           :self="self"
-          :reply-target-name="replyTargetName"
-          :reply-target-content="replyTargetContent"
+          :target-name="targetName"
+          :reply-text="replyText"
+          :reply-image-url="replyImageUrl"
+          :reply-image-alt="replyImageAlt"
+          :max-img-width="maxImgWidth"
+          :max-img-height="maxImgHeight"
         />
         <span><slot></slot></span>
       </div>
