@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import QMessageItem from './base/QMessageItem.vue'
-import type qTagColor from '@pkg/lib/QTagColors'
+import type QTagColors from '@pkg/lib/QTagColors'
 
 withDefaults(
   defineProps<{
@@ -8,7 +8,7 @@ withDefaults(
     userName: string
     avatarUrl?: string
     tagContent?: string
-    tagColor?: qTagColor | keyof typeof qTagColor
+    tagColor?: QTagColors | keyof typeof QTagColors
     isBot?: boolean
     imageUrl: string
     isFile?: boolean

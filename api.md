@@ -58,7 +58,7 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | userName     | 用户名                                       | `string`  | -              |
 | avatarUrl    | 头像 url                                     | `string`  | -              |
 | tagContent   | 群头衔内容，留空则表示没有头衔               | `string`  | undefined      |
-| tagColor     | 群头像颜色，留空即为灰色                     | `enum`    | qTagColor.grey |
+| tagColor     | 群头像颜色，留空即为灰色                     | `enum`    | QTagColors.grey |
 | maxImgWidth  | 图文消息中图片的最大宽度（防止过大影响观感） | `string`  | 230px          |
 | maxImgHeight | 图文消息中图片的最大高度（防止过大影响观感） | `string`  | 250px          |
 
@@ -74,7 +74,7 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | userName    | 用户名                                                         | `string`  | -              |
 | avatarUrl   | 头像 url                                                       | `string`  | -              |
 | tagContent  | 群头衔内容，留空则表示没有头衔                                 | `string`  | undefined      |
-| tagColor    | 群头像颜色，留空即为灰色                                       | `enum`    | qTagColor.grey |
+| tagColor    | 群头像颜色，留空即为灰色                                       | `enum`    | QTagColors.grey |
 | imageUrl    | 图片 URL                                                       | `string`  | -              |
 | isFile      | 是否是文件形式的图片                                           | `boolean` | false          |
 | fileName    | 图片文件名（当且仅当 `isFile` 为 true 时起作用）               | string    | undefined      |
@@ -122,7 +122,7 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | userName           | 用户名                                   | `string`  | -              |
 | avatarUrl          | 头像 url                                 | `string`  | -              |
 | tagContent         | 群头衔内容，留空则表示没有头衔           | `string`  | undefined      |
-| tagColor           | 群头像颜色，留空即为灰色                 | `enum`    | qTagColor.grey |
+| tagColor           | 群头像颜色，留空即为灰色                 | `enum`    | QTagColors.grey |
 | replyTargetName    | 被回复用户的昵称                         | `string`  | -              |
 | replyTargetContent | 被回复的内容（暂只支持文字）             | `string`  | -              |
 
@@ -140,6 +140,6 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | userName   | 用户名                                   | `string`  | -                      |
 | avatarUrl  | 头像 url                                 | `string`  | -                      |
 | tagContent | 群头衔内容，留空则表示没有头衔           | `string`  | undefined              |
-| tagColor   | 群头像颜色，留空即为灰色                 | `enum`    | qTagColor.grey         |
+| tagColor   | 群头像颜色，留空即为灰色                 | `enum`    | QTagColors.grey         |
 | audioSrc   | 语音文件 URL                             | `string`  | -                      |
 | text       | 语音转文字结果                           | `string`  | `[呃，什么都没有听到]` |

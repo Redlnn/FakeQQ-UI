@@ -3,7 +3,7 @@ import { onBeforeUnmount, onBeforeUpdate, onMounted, ref } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
 import QMessageItem from './base/QMessageItem.vue'
-import type qTagColor from '@pkg/lib/QTagColors'
+import type QTagColors from '@pkg/lib/QTagColors'
 
 const props = withDefaults(
   defineProps<{
@@ -11,7 +11,7 @@ const props = withDefaults(
     userName: string
     avatarUrl?: string
     tagContent?: string
-    tagColor?: qTagColor | keyof typeof qTagColor
+    tagColor?: QTagColors | keyof typeof QTagColors
     isBot?: boolean
     audioSrc: string
     text?: string

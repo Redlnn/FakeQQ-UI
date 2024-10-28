@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import qTagColor from '@pkg/lib/QTagColors'
+import QTagColors from '@pkg/lib/QTagColors'
 
 withDefaults(
   defineProps<{
@@ -7,14 +7,14 @@ withDefaults(
     userName: string
     avatarUrl?: string
     tagContent?: string
-    tagColor?: qTagColor | keyof typeof qTagColor
+    tagColor?: QTagColors | keyof typeof QTagColors
     isBot?: boolean
   }>(),
   {
     self: false,
     avatarUrl: '',
     tagContent: undefined,
-    tagColor: qTagColor.grey,
+    tagColor: QTagColors.grey,
     isBot: false
   }
 )
