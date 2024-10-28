@@ -36,7 +36,7 @@
 
 ## 使用方法
 
-1. 为你的项目添加 `sass` 或 `sass-embedded` 依赖
+1. 为你的项目添加 `sass-embedded`（推荐）或 `sass` 依赖
 
 2. 前往 [Release](https://github.com/Redlnn/FakeQQ-UI/releases/latest)
    页面，寻找最新的版本的 tar 包下载地址并用你的包管理器添加，如：
@@ -44,6 +44,8 @@
    ```sh
    pnpm add https://github.com/Redlnn/FakeQQ-UI/releases/download/v0.1.0/fake-qq-ui-0.1.0.tgz
    ```
+
+   > 暂时还不打算发布到 npmjs
 
 3. 你可以选择将 FakeQQUI 中的所有组件[注册为全局组件](#注册为全局组件)，
    或者你可以[手动按需导入组件](#手动导入)
