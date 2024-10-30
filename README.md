@@ -5,6 +5,8 @@
 > [!NOTE]  
 > 全方位模仿：大部分样式来自与 QQ NT for Windows，部分样式经修改
 
+[![npm](https://img.shields.io/npm/v/fake-qq-ui)](https://www.npmjs.com/package/fake-qq-ui)
+
 ## 已实现
 
 - 纯文本消息
