@@ -87,7 +87,7 @@
    ```html
    <template>
      <div>
-       <q-text user-name="[bot] 机器人" tag-content="LV96 机器人" tag-color="purple" is-bot>
+       <q-text name="[bot] 机器人" tag="LV96 机器人" tag-color="purple" is-bot>
          今天天气不错
        </q-text>
      </div>
@@ -115,7 +115,7 @@
    </script>
    <template>
      <div>
-       <q-text user-name="[bot] 机器人" tag-content="LV96 机器人" tag-color="purple" is-bot>
+       <q-text name="[bot] 机器人" tag="LV96 机器人" tag-color="purple" is-bot>
          今天天气不错
        </q-text>
      </div>

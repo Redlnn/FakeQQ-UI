@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import QMessageItem from './base/QMessageItem.vue'
+import QMessageBase from './base/QMessageBase.vue'
 import type QTagColors from '@pkg/lib/QTagColors'
+import type QTagCustomize from '@pkg/lib/QTagCustomize'
 
 withDefaults(
   defineProps<{
     self?: boolean
-    userName: string
-    avatarUrl?: string
-    tagContent?: string
-    tagColor?: QTagColors | keyof typeof QTagColors
+    name: string
+    avatar?: string
+    tag?: string
+    tagColor?: QTagColors | keyof typeof QTagColors | QTagCustomize
     isBot?: boolean
-    imageUrl: string
+    src: string
+    alt?: string
     isFile?: boolean
     fileName?: string
     fileSize?: string
@@ -20,10 +22,11 @@ withDefaults(
   }>(),
   {
     self: false,
-    avatarUrl: '',
-    tagContent: undefined,
+    avatar: undefined,
+    tag: undefined,
     tagColor: undefined,
     isBot: false,
+    alt: undefined,
     isFile: false,
     fileName: undefined,
     fileSize: undefined,
@@ -35,11 +38,11 @@ withDefaults(
 </script>
 
 <template>
-  <q-message-item
+  <q-message-base
     :self="self"
-    :user-name="userName"
-    :avatar-url="avatarUrl"
-    :tag-content="tagContent"
+    :name="name"
+    :avatar="avatar"
+    :tag="tag"
     :tag-color="tagColor"
     :is-bot="isBot"
   >
@@ -47,13 +50,13 @@ withDefaults(
       class="msg-content-container mix-message__container mix-message__container--pic"
       :class="self ? 'container--self' : 'container--others'"
     >
-      <a v-if="isFile && canDownload" class="file-link" :href="imageUrl" :download="fileName"></a>
+      <a v-if="isFile && canDownload" class="file-link" :href="src" :download="fileName"></a>
       <div class="message-content mix-message__inner">
         <div
           class="image pic-element"
           :style="{ '--max-image-width': maxWidth, '--max-image-height': maxHeight }"
         >
-          <img :src="imageUrl" class="image-content" />
+          <img :src="src" :alt="alt" class="image-content" />
         </div>
         <div v-if="isFile" class="file-info-mask">
           <p v-if="fileName" class="qq-text-ellipsis" style="display: flex">
@@ -63,7 +66,7 @@ withDefaults(
         </div>
       </div>
     </div>
-  </q-message-item>
+  </q-message-base>
 </template>
 
 <style lang="scss" scoped>

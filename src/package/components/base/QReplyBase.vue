@@ -2,7 +2,7 @@
 withDefaults(
   defineProps<{
     self?: boolean
-    targetName: string
+    target: string
     replyText?: string
     replyImageUrl?: string
     replyImageAlt?: string
@@ -24,7 +24,7 @@ withDefaults(
   <div class="reply-element nocopy" :class="self ? ['reply-element--self'] : ''">
     <div class="reply-title">
       <div class="reply-info">
-        <span class="qq-text-ellipsis">{{ targetName }}</span>
+        <span class="qq-text-ellipsis">{{ target }}</span>
       </div>
     </div>
     <div class="reply-content">

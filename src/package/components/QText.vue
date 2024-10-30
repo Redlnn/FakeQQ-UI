@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import QMessageItem from './base/QMessageItem.vue'
+import QMessageBase from './base/QMessageBase.vue'
 import type QTagColors from '@pkg/lib/QTagColors'
+import type QTagCustomize from '@pkg/lib/QTagCustomize'
 
 withDefaults(
   defineProps<{
     self?: boolean
-    userName: string
-    avatarUrl?: string
-    tagContent?: string
-    tagColor?: QTagColors | keyof typeof QTagColors
+    name: string
+    avatar?: string
+    tag?: string
+    tagColor?: QTagColors | keyof typeof QTagColors | QTagCustomize
     isBot?: boolean
     maxImgWidth?: string
     maxImgHeight?: string
   }>(),
   {
     self: false,
-    avatarUrl: '',
-    tagContent: undefined,
+    avatar: undefined,
+    tag: undefined,
     tagColor: undefined,
     isBot: false,
     maxImgWidth: '230px',
@@ -26,11 +27,11 @@ withDefaults(
 </script>
 
 <template>
-  <q-message-item
+  <q-message-base
     :self="self"
-    :user-name="userName"
-    :avatar-url="avatarUrl"
-    :tag-content="tagContent"
+    :name="name"
+    :avatar="avatar"
+    :tag="tag"
     :tag-color="tagColor"
     :is-bot="isBot"
   >
@@ -45,7 +46,7 @@ withDefaults(
         <span><slot></slot></span>
       </div>
     </div>
-  </q-message-item>
+  </q-message-base>
 </template>
 
 <style lang="scss" scoped>

@@ -2,11 +2,17 @@
 
 > 下文中属性默认值为 undefined 或其他内容代表该属性可选
 
-## QTagColor
+## 注意事项
 
-QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头像`等 tag
+### TagColor
+
+TagColor 是一个几乎所有组件都拥有的参数，用于群头衔。
+
+其类型为 `QTagColors | keyof typeof QTagColors | QTagCustomize`
+
+其中 QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头像`等 tag
 中，原型位于 `lib/QTagColors.d.ts` 中，你可以使用
-`import { QTagColors } from 'fake-qq-ui' 来导入，其包含以下几种颜色：
+`import { QTagColors } from 'fake-qq-ui'` 来导入，其包含以下几种颜色：
 
 - `sage_green`：鼠尾草绿
 - `red`：红色
@@ -14,6 +20,27 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 - `purple`：紫色，用于自定义头衔
 - `blue`：蓝色，用于管理员
 - `grey`：灰色，用于群等级
+
+而 QTagCustomize 则是一个 interface，使用时传入一个对象。
+
+用法如下：
+
+```vue
+<script setup lang="ts">
+import { QTagColors } from 'fake-qq-ui'
+</script>
+
+<template>
+  <!-- 传入字符串 -->
+  <q-text name="你" tag="群主" tag-color="orange">Something...</q-text>
+  <!-- 传入 QTagColors -->
+  <q-text name="我" tag="管理员" :tag-color="QTagColors.blue">Something...</q-text>
+  <!-- 传入满足 QTagCustomize 对象 -->
+  <q-text name="他" tag="猜猜我是谁" :tag-color="{ backgroundColor: '#222', color: '#fff' }">
+    Something...
+  </q-text>
+</template>
+```
 
 ## QHeader
 
@@ -56,9 +83,9 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | ------------ | -------------------------------------------- | --------- | --------------- |
 | self         | 是否是浏览者视角发送（即消息是否在右边）     | `boolean` | false           |
 | isBot        | 是否为机器人消息                             | `boolean` | false           |
-| userName     | 用户名                                       | `string`  | -               |
-| avatarUrl    | 头像来源地址                                 | `string`  | ''              |
-| tagContent   | 群头衔内容，留空则表示没有头衔               | `string`  | undefined       |
+| name         | 用户名                                       | `string`  | -               |
+| avatar       | 头像来源地址                                 | `string`  | undefined       |
+| tag          | 群头衔内容，留空则表示没有头衔               | `string`  | undefined       |
 | tagColor     | 群头像颜色，留空即为灰色                     | `enum`    | QTagColors.grey |
 | maxImgWidth  | 图文消息中图片的最大宽度（防止过大影响观感） | `string`  | 230px           |
 | maxImgHeight | 图文消息中图片的最大高度（防止过大影响观感） | `string`  | 250px           |
@@ -73,11 +100,11 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | ----------- | -------------------------------------------------------------- | --------- | --------------- |
 | self        | 是否是浏览者视角发送（即消息是否在右边）                       | `boolean` | false           |
 | isBot       | 是否为机器人消息                                               | `boolean` | false           |
-| userName    | 用户名                                                         | `string`  | -               |
-| avatarUrl   | 头像来源地址                                                   | `string`  | ''              |
-| tagContent  | 群头衔内容，留空则表示没有头衔                                 | `string`  | undefined       |
+| name        | 用户名                                                         | `string`  | -               |
+| avatar      | 头像来源地址                                                   | `string`  | undefined       |
+| tag         | 群头衔内容，留空则表示没有头衔                                 | `string`  | undefined       |
 | tagColor    | 群头像颜色，留空即为灰色                                       | `enum`    | QTagColors.grey |
-| imageUrl    | 图片来源地址                                                   | `string`  | -               |
+| src         | 图片来源地址                                                   | `string`  | -               |
 | isFile      | 是否是文件形式的图片                                           | `boolean` | false           |
 | fileName    | 图片文件名（当且仅当 `isFile` 为 true 时起作用）               | string    | undefined       |
 | fileSize    | 图片文件大小（当且仅当 `isFile` 为 true 时起作用）             | string    | undefined       |
@@ -95,14 +122,14 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | ----------- | ---------------------------------------- | --------- | --------------- |
 | self        | 是否是浏览者视角发送（即消息是否在右边） | `boolean` | false           |
 | isBot       | 是否为机器人消息                         | `boolean` | false           |
-| userName    | 用户名                                   | `string`  | -               |
-| avatarUrl   | 头像来源地址                             | `string`  | ''              |
-| tagContent  | 群头衔内容，留空则表示没有头衔           | `string`  | undefined       |
+| name        | 用户名                                   | `string`  | -               |
+| avatar      | 头像来源地址                             | `string`  | undefined       |
+| tag         | 群头衔内容，留空则表示没有头衔           | `string`  | undefined       |
 | tagColor    | 群头像颜色，留空即为灰色                 | `enum`    | QTagColors.grey |
 | fileName    | 文件名                                   | string    | undefined       |
 | fileSize    | 文件大小                                 | string    | undefined       |
-| fileUrl     | 文件链接                                 | `string`  | -               |
-| fileIconUrl | 文件图标来源地址                         | `string`  | -               |
+| fileSrc     | 文件链接                                 | `string`  | -               |
+| iconSrc     | 文件图标来源地址                         | `string`  | -               |
 | canDownload | 用户点击时是否下载该文件                 | `boolean` | true            |
 
 ## QTip
@@ -142,11 +169,11 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 | ------------- | ------------------------------------------ | --------- | --------------- | --- |
 | self          | 是否是浏览者视角发送（即消息是否在右边）   | `boolean` | false           |
 | isBot         | 是否为机器人消息                           | `boolean` | false           |
-| userName      | 用户名                                     | `string`  | -               |
-| avatarUrl     | 头像来源地址                               | `string`  | ''              |
-| tagContent    | 群头衔内容，留空则表示没有头衔             | `string`  | undefined       |
+| name          | 用户名                                     | `string`  | -               |
+| avatar        | 头像来源地址                               | `string`  | undefined       |
+| tag           | 群头衔内容，留空则表示没有头衔             | `string`  | undefined       |
 | tagColor      | 群头像颜色，留空即为灰色                   | `enum`    | QTagColors.grey |
-| targetName    | 被回复用户的昵称                           | `string`  | -               |
+| target        | 被回复用户的昵称                           | `string`  | -               |
 | replyText     | 被回复的文字                               | `string`  | ''              |
 | replyImageUrl | 被回复的图片来源地址（有图片时不显示文字） | `string`  | undefined       |     |
 | replyImageAlt | 被回复的图片描述                           | `string`  | undefined       |
@@ -159,16 +186,16 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 
 ### QVoice 属性
 
-| 属性       | 说明                                     | 类型      | 默认值                 |
-| ---------- | ---------------------------------------- | --------- | ---------------------- |
-| self       | 是否是浏览者视角发送（即消息是否在右边） | `boolean` | false                  |
-| isBot      | 是否为机器人消息                         | `boolean` | false                  |
-| userName   | 用户名                                   | `string`  | -                      |
-| avatarUrl  | 头像来源地址                             | `string`  | ''                     |
-| tagContent | 群头衔内容，留空则表示没有头衔           | `string`  | undefined              |
-| tagColor   | 群头像颜色，留空即为灰色                 | `enum`    | QTagColors.grey        |
-| audioSrc   | 语音文件 URL                             | `string`  | -                      |
-| text       | 语音转文字结果                           | `string`  | `[呃，什么都没有听到]` |
+| 属性     | 说明                                     | 类型      | 默认值                 |
+| -------- | ---------------------------------------- | --------- | ---------------------- |
+| self     | 是否是浏览者视角发送（即消息是否在右边） | `boolean` | false                  |
+| isBot    | 是否为机器人消息                         | `boolean` | false                  |
+| name     | 用户名                                   | `string`  | -                      |
+| avatar   | 头像来源地址                             | `string`  | undefined              |
+| tag      | 群头衔内容，留空则表示没有头衔           | `string`  | undefined              |
+| tagColor | 群头像颜色，留空即为灰色                 | `enum`    | QTagColors.grey        |
+| src      | 语音文件 URL                             | `string`  | -                      |
+| text     | 语音转文字结果                           | `string`  | `[呃，什么都没有听到]` |
 
 ## QForward
 
@@ -176,13 +203,13 @@ QTagColor 是一个 enum，用于消息中名字后面的`管理员`、`群头�
 
 ### QForward 属性
 
-| 属性       | 说明                                     | 类型       | 默认值           |
-| ---------- | ---------------------------------------- | ---------- | ---------------- |
-| self       | 是否是浏览者视角发送（即消息是否在右边） | `boolean`  | false            |
-| isBot      | 是否为机器人消息                         | `boolean`  | false            |
-| userName   | 用户名                                   | `string`   | -                |
-| avatarUrl  | 头像来源地址                             | `string`   | ''               |
-| tagContent | 群头衔内容，留空则表示没有头衔           | `string`   | undefined        |
-| tagColor   | 群头像颜色，留空即为灰色                 | `enum`     | QTagColors.grey  |
-| title      | 合并转发标题                             | `string`   | `群聊的聊天记录` |
-| contents   | 合并转发内容                             | `string[]` | -                |
+| 属性     | 说明                                     | 类型       | 默认值           |
+| -------- | ---------------------------------------- | ---------- | ---------------- |
+| self     | 是否是浏览者视角发送（即消息是否在右边） | `boolean`  | false            |
+| isBot    | 是否为机器人消息                         | `boolean`  | false            |
+| name     | 用户名                                   | `string`   | -                |
+| avatar   | 头像来源地址                             | `string`   | undefined        |
+| tag      | 群头衔内容，留空则表示没有头衔           | `string`   | undefined        |
+| tagColor | 群头像颜色，留空即为灰色                 | `enum`     | QTagColors.grey  |
+| title    | 合并转发标题                             | `string`   | `群聊的聊天记录` |
+| contents | 合并转发内容                             | `string[]` | -                |

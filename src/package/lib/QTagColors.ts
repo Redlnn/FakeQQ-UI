@@ -1,4 +1,4 @@
-enum TagColor {
+enum QTagColors {
   sage_green = 'sage_green',
   red = 'red',
   orange = 'orange',
@@ -7,4 +7,4 @@ enum TagColor {
   grey = 'grey'
 }
 
-export default TagColor
+export default QTagColors

@@ -1,55 +1,56 @@
 <script setup lang="ts">
-import QMessageItem from './base/QMessageItem.vue'
+import QMessageBase from './base/QMessageBase.vue'
 import type QTagColors from '@pkg/lib/QTagColors'
+import type QTagCustomize from '@pkg/lib/QTagCustomize'
 
 withDefaults(
   defineProps<{
     self?: boolean
-    userName: string
-    avatarUrl?: string
-    tagContent?: string
-    tagColor?: QTagColors | keyof typeof QTagColors
+    name: string
+    avatar?: string
+    tag?: string
+    tagColor?: QTagColors | keyof typeof QTagColors | QTagCustomize
     isBot?: boolean
     fileName: string
     fileSize?: string
-    fileUrl?: string
-    fileIconUrl?: string
+    fileSrc?: string
+    iconSrc?: string
     canDownload?: boolean
   }>(),
   {
     self: false,
-    avatarUrl: '',
-    tagContent: undefined,
+    avatar: undefined,
+    tag: undefined,
     tagColor: undefined,
     isBot: false,
     fileSize: undefined,
-    fileUrl: undefined,
-    fileIconUrl: undefined,
+    fileSrc: undefined,
+    iconSrc: undefined,
     canDownload: true
   }
 )
 </script>
 
 <template>
-  <q-message-item
+  <q-message-base
     :self="self"
-    :user-name="userName"
-    :avatar-url="avatarUrl"
-    :tag-content="tagContent"
+    :name="name"
+    :avatar="avatar"
+    :tag="tag"
     :tag-color="tagColor"
     :is-bot="isBot"
   >
     <div class="file-message--content nocopy">
-      <a v-if="fileUrl && canDownload" class="file-link" :href="fileUrl" :download="fileName"></a>
+      <a v-if="fileSrc && canDownload" class="file-link" :href="fileSrc" :download="fileName"></a>
       <div class="normal-file file-element">
         <div class="file-header">
           <p class="file-name">
             <span class="qq-text-ellipsis">{{ fileName }}</span>
           </p>
           <div
-            v-if="fileIconUrl"
+            v-if="iconSrc"
             class="file-icon"
-            :style="{ backgroundImage: `url(${fileIconUrl})` }"
+            :style="{ backgroundImage: `url(${iconSrc})` }"
           ></div>
         </div>
         <div v-if="fileSize" class="file-info">
@@ -57,7 +58,7 @@ withDefaults(
         </div>
       </div>
     </div>
-  </q-message-item>
+  </q-message-base>
 </template>
 
 <style lang="scss" scoped>

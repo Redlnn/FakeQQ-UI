@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import QTagColors from '@pkg/lib/QTagColors'
+import type QTagCustomize from '@pkg/lib/QTagCustomize'
 
 withDefaults(
   defineProps<{
     self?: boolean
-    userName: string
-    avatarUrl?: string
-    tagContent?: string
-    tagColor?: QTagColors | keyof typeof QTagColors
+    name: string
+    avatar?: string
+    tag?: string
+    tagColor?: QTagColors | keyof typeof QTagColors | QTagCustomize
     isBot?: boolean
   }>(),
   {
     self: false,
-    avatarUrl: '',
-    tagContent: undefined,
+    avatar: undefined,
+    tag: undefined,
     tagColor: QTagColors.grey,
     isBot: false
   }
@@ -27,18 +28,29 @@ withDefaults(
   >
     <div class="qq-message__avatar-span">
       <div
-        v-if="avatarUrl"
-        :style="{ backgroundImage: `url(${avatarUrl})` }"
+        v-if="avatar"
+        :style="{ backgroundImage: `url(${avatar})` }"
         class="qq-message__avatar"
       ></div>
       <div v-else class="qq-message__text-avatar">
-        <span>{{ userName[0] }}</span>
+        <span>{{ name[0] }}</span>
       </div>
     </div>
     <div class="qq-message__user-name nocopy qq-text-ellipsis">
-      <span class="qq-text-ellipsis">{{ userName }}</span>
-      <div v-if="tagContent" class="q-tag qq-message__user-label" :class="[`q-tag--${tagColor}`]">
-        {{ tagContent }}
+      <span class="qq-text-ellipsis">{{ name }}</span>
+      <div
+        v-if="tag && typeof tagColor === 'string'"
+        class="q-tag qq-message__user-label"
+        :class="[`q-tag--${tagColor}`]"
+      >
+        {{ tag }}
+      </div>
+      <div
+        v-else-if="tag && typeof tagColor === 'object'"
+        class="q-tag qq-message__user-label"
+        :style="{ backgroundColor: tagColor.backgroundColor, color: tagColor.color }"
+      >
+        {{ tag }}
       </div>
       <label v-if="isBot" class="qq-bot-label qq-bot-label--middle qq-bot-label--mini">
         <i class="q-svg-icon q-icon" style="width: 1em; height: 1em">
