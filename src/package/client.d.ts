@@ -6,6 +6,7 @@ import type QImage from './components/QImage.vue'
 import type QFile from './components/QFile.vue'
 import type QTip from './components/QTip.vue'
 import type QVoice from './components/QVoice.vue'
+import type QVoiceLegacy from './components/QVoiceLegacy.vue'
 import type QMessageItem from './components/base/QMessageBase.vue'
 import type QForward from './components/QForward.vue'
 
@@ -19,6 +20,7 @@ declare module 'vue' {
     QFile: typeof QFile
     QTip: typeof QTip
     QVoice: typeof QVoice
+    QVoiceLegacy: typeof QVoiceLegacy
     QForward: typeof QForward
     QMessageItem: typeof QMessageItem
   }

@@ -180,11 +180,19 @@ import { QTagColors } from 'fake-qq-ui'
 | maxImgWidth   | 被回复的图片的最大宽度                     | `string`  | '200px'         |
 | maxImgHeight  | 被回复的图片的最大高度                     | `string`  | '220px'         |
 
-## QVoice
+## QVoice / QVoiceLegacy
 
 语音消息。
 
-### QVoice 属性
+> [!IMPORTANT]
+>
+> 1. QVoice 组件使用现代的 AudioContext 实现，加载时会先使用 [Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
+>    下载音频后分析得到音频强度分布，因此 src 参数中的地址不能出现跨域访问（除非对方站点允许你跨域）
+> 2. 由于 QVoice 组件使用 AudioContext 实现，因此首次加载时会在浏览器控制台输出警告信息，为正常现象
+> 3. QVoiceLegacy 组件为使用 `<audio>` 标签实现的旧组件，该实现方式不支持在展示语音强度分布，
+>    所展示效果为每次加载时随机生成
+
+### QVoice / QVoiceLegacy 属性
 
 | 属性     | 说明                                     | 类型      | 默认值                 |
 | -------- | ---------------------------------------- | --------- | ---------------------- |
@@ -196,6 +204,7 @@ import { QTagColors } from 'fake-qq-ui'
 | tagColor | 群头像颜色，留空即为灰色                 | `enum`    | QTagColors.grey        |
 | src      | 语音文件 URL                             | `string`  | -                      |
 | text     | 语音转文字结果                           | `string`  | `[呃，什么都没有听到]` |
+| volume   | 音量                                     | `number`  | `1.0`                  |
 
 ## QForward
 

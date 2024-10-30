@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
 import QVoiceBase from './base/QVoiceBase.vue'
@@ -29,34 +29,24 @@ const props = withDefaults(
   }
 )
 
+const audio = ref<HTMLAudioElement>()
 const progressItemsRef = ref<HTMLDivElement>()
 const processLinePos = ref(0)
+const duration = ref(0)
 const formatedDuration = ref('')
 const processHeightRefs = ref<number[]>([])
 const playEnded = ref(true)
 const playPaused = ref(true)
 
-let audioCtx: AudioContext | undefined
-let audioBuffer: AudioBuffer | undefined
 let controller: processController | undefined
-let gainNode: GainNode | undefined
 
 function getLineCount(num: number) {
   num = num / 1.2
-  if (num < 4) return 4
-  if (num > 30) return 30
-  return num
+  return Array.from({ length: num >= 25 ? 25 : num < 5 ? 5 : num }, () => getRndInteger(30, 60))
 }
 
-function convertDbToPercentage(db: number) {
-  const min = -80
-  const max = 0
-
-  if (db >= max) return 1 // 0 dB 为 100%
-  if (db <= min) return 0.2 // -90 dB 为 5%
-
-  // 线性插值计算
-  return ((db - min) / (max - min)) * (1 - 0.2) + 0.2
+function getRndInteger(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 function formatDuration(duration: number) {
@@ -65,87 +55,46 @@ function formatDuration(duration: number) {
   return m > 0 ? `${m}'${s}"` : `${s}"`
 }
 
-async function loadAudio(src: string) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-  gainNode = audioCtx.createGain()
-  gainNode.connect(audioCtx.destination)
+async function loadAudio() {
+  if (!audio.value) return
+  duration.value = Math.round(audio.value.duration)
 
-  try {
-    const res = await fetch(src)
-    const data = await res.arrayBuffer()
-    audioBuffer = await audioCtx.decodeAudioData(data)
-
-    const channelData = audioBuffer.getChannelData(0)
-    const numSamples = getLineCount(audioBuffer.duration)
-    const segmentLength = Math.floor(channelData.length / numSamples)
-
-    const loudnessArray = Array.from({ length: numSamples }, (_, i) => {
-      const segment = channelData.slice(i * segmentLength, (i + 1) * segmentLength)
-      const rms = Math.sqrt(segment.reduce((sum, value) => sum + value ** 2, 0) / segment.length)
-      const safeRms = Math.max(rms, 1e-10)
-      return 20 * Math.log10(safeRms)
-    })
-
-    formatedDuration.value = formatDuration(audioBuffer.duration)
-    processHeightRefs.value = loudnessArray.map(convertDbToPercentage)
-  } catch (error) {
-    console.error('Error loading audio file:', error)
-    formatedDuration.value = 'Error'
-    processHeightRefs.value = Array(10).fill(0.05)
-  }
+  formatedDuration.value = formatDuration(duration.value)
+  processHeightRefs.value = getLineCount(duration.value)
 }
 
 function play() {
-  if (
-    audioCtx === undefined ||
-    audioBuffer === undefined ||
-    progressItemsRef.value === undefined ||
-    gainNode === undefined
-  )
-    return
+  if (!(audio.value && progressItemsRef.value)) return
+  playPaused.value = !playPaused.value
 
   if (playEnded.value) {
-    const source = audioCtx.createBufferSource()
-    source.buffer = audioBuffer
-    source.connect(gainNode)
-    source.onended = () => {
-      playEnded.value = true
-      playPaused.value = true
-    }
-    source.start()
+    audio.value.play()
     playEnded.value = false
     playPaused.value = false
 
     progressItemsRef.value.style.setProperty('--process-item-color', 'var(--qq-text-secondary-01)')
-    controller = new processController(
-      [...progressItemsRef.value.children] as HTMLDivElement[],
-      audioBuffer.duration
-    )
+    controller = new processController([...progressItemsRef.value.children] as HTMLDivElement[])
     controller.start()
   } else {
-    if (audioCtx.state === 'running') {
-      audioCtx.suspend()
-      controller?.pause()
-      playPaused.value = true
-    } else if (audioCtx.state === 'suspended') {
-      audioCtx.resume()
+    if (audio.value.paused) {
+      audio.value.play()
       controller?.resume()
       playPaused.value = false
+    } else {
+      audio.value.pause()
+      controller?.pause()
+      playPaused.value = true
     }
   }
 }
 
 class processController {
   private progressItems: HTMLElement[]
-  private duration: number
   private pauseFn: (() => void) | undefined = undefined
   private resumeFn: (() => void) | undefined = undefined
 
-  constructor(progressItems: HTMLElement[], duration: number) {
+  constructor(progressItems: HTMLElement[]) {
     this.progressItems = progressItems
-    this.duration = duration
   }
 
   start() {
@@ -164,7 +113,7 @@ class processController {
         this.progressItems[i].style.setProperty('--process-item-color', 'var(--qq-text_primary)')
         i++
       },
-      (Math.floor(this.duration) / this.progressItems.length) * 1000,
+      (Math.floor(duration.value) / this.progressItems.length) * 1000,
       { immediate: true }
     )
 
@@ -176,7 +125,7 @@ class processController {
         }
         processLinePos.value++
       },
-      (Math.floor(this.duration) / 100) * 1000,
+      (Math.floor(duration.value) / 100) * 1000,
       { immediate: true }
     )
 
@@ -203,20 +152,16 @@ class processController {
   }
 }
 
-onMounted(async () => {
-  await loadAudio(props.src)
-})
-
-onBeforeUnmount(() => {
-  if (audioCtx === undefined) return
-  audioCtx.close()
-})
+function reset() {
+  playEnded.value = true
+  playPaused.value = true
+}
 
 watch(
   () => props.volume,
   volume => {
-    if (gainNode === undefined) return
-    gainNode.gain.value = volume
+    if (audio.value === undefined) return
+    audio.value.volume = volume
   }
 )
 </script>
@@ -234,6 +179,7 @@ watch(
     :play-paused="playPaused"
     :formated-duration="formatedDuration"
   >
+    <audio ref="audio" :src="src" @ended="reset" @loadedmetadata="loadAudio"></audio>
     <div
       ref="progressItemsRef"
       class="ptt-element__progress"
@@ -248,7 +194,7 @@ watch(
         v-for="(height, index) in processHeightRefs"
         :key="index"
         class="ptt-element__progress-item"
-        :style="{ height: `${height * 100}%` }"
+        :style="{ height: `${height}%` }"
       ></div>
     </div>
   </q-voice-base>
