@@ -1,7 +1,7 @@
 {
   "name": "fake-qq-ui",
   "description": "一个全方位模仿 QQ NT 的聊天气泡样式与功能的 VUE 组件库",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "author": {
