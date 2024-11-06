@@ -48,8 +48,8 @@ const a = defineConfig(({ mode }) => {
       sourcemap: true,
       lib: {
         entry: fileURLToPath(new URL('./src/package', import.meta.url)),
-        name: 'FakeQQUI'
-        // formats: ['es', 'umd', 'cjs']
+        name: 'FakeQQUI',
+        formats: ['es', 'umd', 'cjs']
       },
       terserOptions: {
         compress: {

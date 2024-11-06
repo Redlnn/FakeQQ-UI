@@ -13,9 +13,6 @@
     "type": "git",
     "url": "git+https://github.com/Redlnn/FakeQQ-UI"
   },
-  "main": "./dist/fake-qq-ui.umd.cjs",
-  "module": "./dist/fake-qq-ui.js",
-  "types": "./dist/index.d.ts",
   "publishConfig": {
     "directory": "dist"
   },

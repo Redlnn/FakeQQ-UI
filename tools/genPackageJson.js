@@ -23,7 +23,7 @@ fs.readFile(originalPath, 'utf8', (err, data) => {
     delete packageData.devDependencies
     delete packageData.packageManager
 
-    packageData.main = './fake-qq-ui.umd.cjs'
+    packageData.main = './fake-qq-ui.cjs'
     packageData.module = './fake-qq-ui.js'
     packageData.types = './index.d.ts'
 
