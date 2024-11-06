@@ -71,7 +71,7 @@ withDefaults(
       </label>
     </div>
     <div class="message-content__wrapper">
-      <slot> </slot>
+      <slot></slot>
     </div>
   </section>
 </template>
