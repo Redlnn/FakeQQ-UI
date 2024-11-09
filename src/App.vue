@@ -35,6 +35,7 @@ const toggleDark = useToggle(isDark)
         reply-text="怎么这个支持笔但不支持触屏"
       >
         @方糖 yes
+        <a>example.com</a>
       </q-reply>
       <q-reply
         name="[AntiFurry] 么叽"

@@ -201,6 +201,11 @@ withDefaults(
       transition:
         color 0.2s,
         background-color 0.2s;
+
+      a {
+        color: var(--qq-host_bubble_text_link);
+        transition: color 0.2s;
+      }
     }
 
     &.container--others .message-content ::-moz-selection {
