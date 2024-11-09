@@ -110,7 +110,7 @@ class processController {
             'var(--qq-text_primary)'
           )
         }
-        this.progressItems[i].style.setProperty('--process-item-color', 'var(--qq-text_primary)')
+        this.progressItems[i]?.style.setProperty('--process-item-color', 'var(--qq-text_primary)')
         i++
       },
       (Math.floor(duration.value) / this.progressItems.length) * 1000,
