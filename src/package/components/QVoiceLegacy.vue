@@ -178,6 +178,7 @@ watch(
     :play="play"
     :play-paused="playPaused"
     :formated-duration="formatedDuration"
+    :text="text"
   >
     <audio ref="audio" :src="src" @ended="reset" @loadedmetadata="loadAudio"></audio>
     <div

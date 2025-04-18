@@ -233,6 +233,7 @@ watch(
     :play="play"
     :play-paused="playPaused"
     :formated-duration="formatedDuration"
+    :text="text"
   >
     <div
       ref="progressItemsRef"
