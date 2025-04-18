@@ -1,7 +1,7 @@
 {
   "name": "fake-qq-ui",
   "description": "一个全方位模仿 QQ NT 的聊天气泡样式与功能的 VUE 组件库",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "type": "module",
   "author": {
@@ -23,31 +23,35 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/",
+    "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
+    "lint:eslint": "eslint . --fix",
+    "lint": "run-s lint:*",
+    "format": "prettier src/ --write -u",
     "gen-pkg-pson": "node tools/genPackageJson.js"
   },
   "dependencies": {
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.0",
-    "@types/node": "^22.9.0",
-    "@vitejs/plugin-vue": "^5.2.0",
-    "@vue/eslint-config-prettier": "^10.1.0",
-    "@vue/eslint-config-typescript": "^14.1.3",
-    "@vue/tsconfig": "^0.6.0",
-    "@vueuse/core": "^11.2.0",
-    "eslint": "^9.15.0",
-    "eslint-plugin-vue": "^9.31.0",
-    "npm-run-all2": "^7.0.1",
-    "prettier": "^3.3.3",
-    "sass-embedded": "^1.81.0",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.11",
-    "vite-plugin-dts": "^4.3.0",
-    "vite-plugin-static-copy": "^2.1.0",
-    "vue-tsc": "^2.1.10"
+    "@tsconfig/node22": "^22.0.1",
+    "@types/node": "^22.14.1",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.5.0",
+    "@vue/tsconfig": "^0.7.0",
+    "@vueuse/core": "^13.1.0",
+    "eslint": "^9.24.0",
+    "eslint-plugin-oxlint": "^0.16.6",
+    "eslint-plugin-vue": "^10.0.0",
+    "npm-run-all2": "^7.0.2",
+    "oxlint": "^0.16.6",
+    "prettier": "^3.5.3",
+    "sass-embedded": "^1.86.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.2",
+    "vite-plugin-dts": "^4.5.3",
+    "vite-plugin-static-copy": "^2.3.1",
+    "vue-tsc": "^2.2.8"
   },
-  "packageManager": "pnpm@9.12.2"
+  "packageManager": "pnpm@10.8.1"
 }
