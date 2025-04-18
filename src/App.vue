@@ -15,6 +15,7 @@ import QImage from './package/components/QImage.vue'
 import QFile from './package/components/QFile.vue'
 import QTip from './package/components/QTip.vue'
 import QVoice from './package/components/QVoice.vue'
+import QForward from './package/components/QForward.vue'
 
 const isDark = useDark({ disableTransition: false })
 const toggleDark = useToggle(isDark)
